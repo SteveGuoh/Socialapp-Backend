@@ -1,19 +1,24 @@
 package com.socialapp.socialapp.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
     UserRepository userRepository;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
     public UserService(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        return userRepository.save(user);
     }
 
 }
