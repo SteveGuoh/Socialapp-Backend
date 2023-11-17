@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @NotNull
+    @NotNull(message = "{socialapp.constraints.username.NotNull.message}")
     @Size(min = 4, max = 255)
     private String username;
 
@@ -29,6 +29,6 @@ public class User {
 
     @NotNull
     @Size(min = 8, max = 255)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message="{hoaxify.constraints.password.Pattern.message}")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message="{socialapp.constraints.password.Pattern.message}")
     private String password;
 }
